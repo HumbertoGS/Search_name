@@ -1,9 +1,10 @@
 "use client";
+
 import { useState } from "react";
 
-import ChangeColor from "./component/ChangeColor";
+import ChangeColor from "./component/ChangeTheme/ChangeColor";
 import Header from "./component/Header";
-import Search from "./component/Search/Search";
+import Body from "./component/Body";
 
 export default function Home() {
   const [active, setActive] = useState(true);
@@ -20,7 +21,7 @@ export default function Home() {
           <ChangeColor active={active} changeActive={handleChange} />
         </Header>
 
-        <Search />
+        <Body />
       </div>
     </div>
   );
