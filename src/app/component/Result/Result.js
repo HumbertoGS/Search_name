@@ -1,7 +1,7 @@
 import useFetch from "@/app/hooks/useFetch";
 
-const Result = () => {
-  const data = useFetch('1');
+const Result = ({ value }) => {
+  const data = useFetch(value);
 
   return (
     <>
