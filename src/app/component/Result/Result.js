@@ -1,16 +1,28 @@
-import useFetch from "@/app/hooks/useFetch";
+import { useState } from "react";
+
+import useGetFetch from "@/app/hooks/useGetFetch";
+import usePostFetch from "@/app/hooks/usePostFetch";
+
+import { MdOutgoingMail } from "react-icons/md";
 
 const Result = ({ value }) => {
-  const data = useFetch(value);
+  const [send, setSend] = useState(null);
+
+  const getFetchData = useGetFetch(value);
+  const postFetchData = usePostFetch(send, () => setSend(null));
+
+  const sendEmail = (dataToSend) => {
+    if (dataToSend) setSend(dataToSend);
+  };
 
   return (
     <>
-      {data && (
+      {getFetchData && (
         <>
           <p className="text-start px-9 pb-5 underline">Result</p>
           <div className="flex justify-start flex-col items-center w-2/4">
             <div className="flex flex-col w-full px-28">
-              {Object.entries(data).map(([key, value]) => {
+              {Object.entries(getFetchData).map(([key, value]) => {
                 if (key !== "id") {
                   return (
                     <div className="flex justify-between" key={key}>
@@ -23,8 +35,14 @@ const Result = ({ value }) => {
               })}
             </div>
           </div>
+
+          <button onClick={() => sendEmail(getFetchData)}>
+            <MdOutgoingMail className="w-7 h-7" />
+          </button>
         </>
       )}
+
+      <div>{postFetchData && <p>{postFetchData.message}</p>}</div>
     </>
   );
 };
