@@ -12,7 +12,7 @@ const useGetFetch = (params = null) => {
       fetch(url_API)
         .then((response) => response.json())
         .then((responseData) => {
-          setData(responseData.students);
+          setData(responseData);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
