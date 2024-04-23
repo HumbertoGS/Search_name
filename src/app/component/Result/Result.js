@@ -1,43 +1,24 @@
-import { useState } from "react";
-
 import useGetFetch from "@/app/hooks/useGetFetch";
-import usePostFetch from "@/app/hooks/usePostFetch";
 
 import Card from "./component/Card";
 import Items from "./component/Item";
 
-import { MdOutgoingMail } from "react-icons/md";
+import ResultData from "./ResultData";
+import AllDataName from "./AllDataName";
 
 const Result = ({ value }) => {
-  const [send, setSend] = useState(null);
-
-  const getFetchData = useGetFetch(value);
-  const postFetchData = usePostFetch(send, () => setSend(null));
-
-  const sendEmail = (dataToSend) => {
-    if (dataToSend) setSend(dataToSend);
-  };
+  const getFetchData = useGetFetch("student", true, value);
+  const getFetchAllData = useGetFetch("students");
 
   return (
     <>
-      {getFetchData && getFetchData?.status === 200 && (
-        <>
-          <Card>
-            {Object.entries(getFetchData?.students).map(([key, value]) => {
-              if (key !== "id") {
-                return <Items keyy={key} value={value} />;
-              }
-              return null;
-            })}
-          </Card>
+      <div className="flex w-full">
+        <AllDataName getFetchAllData={getFetchAllData} />
 
-          <button onClick={() => sendEmail(getFetchData?.students)}>
-            <MdOutgoingMail className="w-7 h-7" />
-          </button>
-
-          <div>{postFetchData && <p>{postFetchData.message}</p>}</div>
-        </>
-      )}
+        {getFetchData && getFetchData?.status === 200 && (
+          <ResultData getFetchData={getFetchData} />
+        )}
+      </div>
 
       {getFetchData && getFetchData?.status !== 200 && (
         <Card>
