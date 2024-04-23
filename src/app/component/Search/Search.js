@@ -12,7 +12,7 @@ const Search = ({ consult }) => {
     <>
       <div className="h-56 m-auto flex justify-center items-center">
         <div className="">
-          <h2 className="py-2">Ey!!, Any name to look for?</h2>
+          <h2 className="py-2">Ey!!, Any name/code to look for?</h2>
           <input
             className="bg-gray-200 shadow-lg text-center border-2 border-gray-600 rounded-tl-md rounded-bl-md w-80 h-9 align-middle 
                         dark:bg-slate-400 dark:text-slate-100 dark:border-slate-800"
