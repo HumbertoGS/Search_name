@@ -5,7 +5,7 @@ const usePostFetch = (dta = null, path = null) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    let url_API = `${process.env.NEXT_PUBLIC_API_LARAVEL}`;
+    let url_API = `${process.env.NEXT_PUBLIC_API_NET_CORE}`;
 
     if (path) {
       url_API = `${url_API}/${path}`;
