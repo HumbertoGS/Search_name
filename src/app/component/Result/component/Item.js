@@ -1,7 +1,7 @@
-const Items = ({ keyy, value }) => {
+const Items = ({ label, value, className = "" }) => {
   return (
-    <div className="flex justify-between" key={keyy}>
-      <label>{keyy}</label>
+    <div className={`flex justify-between ${className}`}>
+      <label>{label}</label>
       <label>{value}</label>
     </div>
   );
