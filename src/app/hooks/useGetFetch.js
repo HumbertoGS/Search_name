@@ -1,24 +1,36 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-const useGetFetch = (params = null) => {
+const useGetFetch = (path = null, requiredParams = false, params = null) => {
   const [data, setData] = useState(null);
 
-  useEffect(() => {
-    let url_API = `${process.env.NEXT_PUBLIC_API_LARAVEL}`;
+  const fetchData = useCallback(() => {
+    let url_API = `${process.env.NEXT_PUBLIC_API_NET_CORE}`;
 
-    if (params) {
-      url_API = `${url_API}/${params}`;
+    if (path) {
+      url_API = `${url_API}/${path}`;
 
-      fetch(url_API)
-        .then((response) => response.json())
-        .then((responseData) => {
-          setData(responseData);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
+      if (requiredParams) {
+        if (params) url_API = `${url_API}/${params}`;
+      }
+
+      if (!requiredParams || (requiredParams && params)) {
+        fetch(url_API)
+          .then((response) => response.json())
+          .then((responseData) => {
+            setData(responseData);
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      }
+    } else {
+      setData(null);
     }
-  }, [params]);
+  }, [path, requiredParams, params]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return data;
 };
