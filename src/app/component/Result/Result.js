@@ -4,25 +4,23 @@ import Card from "./component/Card";
 import Items from "./component/Item";
 
 import ResultData from "./ResultData";
-import AllDataName from "./AllDataName";
+// import AllDataName from "./AllDataName";
 
 const Result = ({ value }) => {
   const getFetchData = useGetFetch("student", true, value);
-  const getFetchAllData = useGetFetch("students");
+  // const getFetchAllData = useGetFetch("students");
 
   return (
     <>
-      <div className="flex w-full">
-        <AllDataName getFetchAllData={getFetchAllData} />
+      {/* <AllDataName getFetchAllData={getFetchAllData} /> */}
 
-        {getFetchData && getFetchData?.status === 200 && (
-          <ResultData getFetchData={getFetchData} />
-        )}
-      </div>
+      {getFetchData && getFetchData?.status === 200 && (
+        <ResultData getFetchData={getFetchData} />
+      )}
 
       {getFetchData && getFetchData?.status !== 200 && (
-        <Card>
-          <Items keyy="Message:" value={getFetchData?.message} />
+        <Card Title="Result">
+          <Items label="Message:" value={getFetchData?.message} />
         </Card>
       )}
     </>
