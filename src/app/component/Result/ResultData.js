@@ -10,7 +10,7 @@ import { MdOutgoingMail } from "react-icons/md";
 const ResultData = ({ getFetchData }) => {
   const [send, setSend] = useState(null);
 
-  const postFetchData = usePostFetch(send, () => setSend(null));
+  const postFetchData = usePostFetch(send, 'SendMail');
 
   const sendEmail = (dataToSend) => {
     if (dataToSend) setSend(dataToSend);
